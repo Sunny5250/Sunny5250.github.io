@@ -74,7 +74,7 @@ p { margin-bottom: 12px; }
 .publication-group + .publication-group { margin-top: 26px; padding-top: 21px; border-top: 1px solid var(--rule); }
 .publication-group-heading { margin: 0 0 18px; font-size: 14px; font-weight: 600; color: var(--muted); }
 .bibliography > li + li { margin-top: 23px; }
-.publication { display: flex; align-items: flex-start; gap: 28px; }
+.publication { --publication-preview-width: 260px; display: flex; align-items: flex-start; gap: 28px; }
 .publication-information { flex: 1; min-width: 0; overflow-wrap: anywhere; }
 .publication-title { font-size: 16px; font-weight: 600; line-height: 1.42; margin: 0 0 5px; text-wrap: pretty; }
 .publication-title a { text-decoration: none; }
@@ -86,7 +86,9 @@ p { margin-bottom: 12px; }
 .publication-links li + li::before { content: "|"; margin-inline: 9px; color: #949da5; }
 .publication-links a { display: inline-block; min-height: 28px; padding-block: 4px; text-decoration: none; }
 .publication-links a:hover, .publication-links a:focus-visible { text-decoration: underline; }
-.publication-preview { display: block; flex: 0 0 144px; width: 144px; height: 108px; object-fit: contain; align-self: center; }
+/* Use one width per breakpoint; intrinsic height preserves every complete figure. */
+.publication-figure { display: block; flex: 0 0 var(--publication-preview-width); width: var(--publication-preview-width); max-width: 100%; min-width: 0; align-self: center; line-height: 0; cursor: zoom-in; }
+.publication-preview { display: block; width: 100%; height: auto; object-fit: contain; }
 
 .education-list { list-style: none; padding: 0; margin: 0; }
 .education-entry { display: grid; grid-template-columns: 54px minmax(0, 1fr); align-items: center; gap: 17px; }
@@ -108,8 +110,7 @@ p { margin-bottom: 12px; }
   nav { column-gap: 16px; }
   .profile-grid { grid-template-columns: 128px minmax(0, 1fr); gap: 28px; }
   .portrait, .portrait-placeholder { width: 128px; height: 154px; }
-  .publication { gap: 22px; }
-  .publication-preview { flex-basis: 124px; width: 124px; height: 96px; }
+  .publication { --publication-preview-width: 220px; gap: 22px; }
 }
 
 @media (max-width: 600px) {
@@ -127,8 +128,7 @@ p { margin-bottom: 12px; }
   .profile-name { font-size: 26px; }
   .profile-biography { margin-top: 16px; }
   .publication { flex-direction: column; gap: 12px; }
-  .publication-preview { flex-basis: auto; align-self: flex-start; width: 148px; height: 106px; }
-  .publication-preview-intrinsic { height: auto; max-height: 126px; object-position: left center; }
+  .publication-figure { flex-basis: auto; align-self: flex-start; width: min(100%, 360px); }
   .bibliography > li + li { margin-top: 25px; }
   .publication-title { font-size: 15.5px; }
   .publication-authors { font-size: 13.5px; }
