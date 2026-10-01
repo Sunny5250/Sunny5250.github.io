@@ -357,7 +357,7 @@ GitHub</a></li>
   <div class="award-group" role="group" aria-labelledby="fudan-awards-heading">
     <h3 id="fudan-awards-heading" class="award-group-heading">Fudan University</h3>
     <ul class="dated-list">
-      <li><span class="entry-date">2025-10</span><span>Bode Scholarship<span class="award-original" lang="zh-Hans">复旦大学计算与智能创新学院博德奖学金</span></span></li>
+      <li><span class="entry-date">2025-10</span><span>College of Computer Science and Artificial Intelligence — Bode Scholarship<span class="award-original" lang="zh-Hans">复旦大学计算与智能创新学院博德奖学金</span></span></li>
     </ul>
   </div>
   <div class="award-group" role="group" aria-labelledby="ecust-awards-heading">
@@ -399,5 +399,61 @@ GitHub</a></li>
 
     </main>
     <footer class="site-footer"><span>Yuxuan Lin · Shanghai, China</span><span>Built with al-folio and Jekyll.</span></footer>
+
+    <script>
+      // Keep native details semantics and no-JS fallback; animate both directions.
+      (() => {
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        document.querySelectorAll('.news-archive').forEach((details) => {
+          const summary = details.querySelector('summary');
+          const content = details.querySelector('.dated-list');
+          if (!summary || !content || !details.animate) return;
+          let animation = null;
+          let expanded = details.open;
+          const settle = () => {
+            if (animation) {
+              animation.onfinish = null;
+              animation.cancel();
+              animation = null;
+            }
+            details.open = expanded;
+            details.style.height = '';
+            details.classList.remove('is-animating');
+            details.removeAttribute('data-closing');
+          };
+          summary.addEventListener('click', (event) => {
+            if (reducedMotion.matches) {
+              settle();
+              expanded = !details.open;
+              return;
+            }
+            event.preventDefault();
+            const startHeight = details.getBoundingClientRect().height;
+            expanded = animation ? !expanded : !details.open;
+            if (animation) {
+              animation.onfinish = null;
+              animation.cancel();
+            }
+            details.open = true;
+            details.toggleAttribute('data-closing', !expanded);
+            details.style.height = '';
+            const endHeight = expanded
+              ? details.getBoundingClientRect().height
+              : summary.getBoundingClientRect().height;
+            details.style.height = startHeight + 'px';
+            details.classList.add('is-animating');
+            animation = details.animate(
+              [{ height: startHeight + 'px' }, { height: endHeight + 'px' }],
+              { duration: 300, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'forwards' }
+            );
+            animation.onfinish = settle;
+          });
+          // Reflow safely if the viewport or system motion preference changes mid-animation.
+          window.addEventListener('resize', () => { if (animation) settle(); });
+          reducedMotion.addEventListener('change', () => { if (animation) settle(); });
+        });
+      })();
+    </script>
   </body>
 </html>
+
