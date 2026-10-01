@@ -156,3 +156,15 @@ p { margin-bottom: 12px; }
   .publication, .education-entry, .dated-list li { break-inside: avoid; }
   h2, h3 { break-after: avoid; }
 }
+
+/* Match the DressWild news emphasis on zeng-tao.github.io. */
+#news .news-paper {
+  font-family: "Source Serif 4", "TeX Gyre Pagella", serif;
+  font-size: 15px;
+  font-weight: 700;
+  font-style: normal;
+  color: #376d95;
+  line-height: 1.55;
+  letter-spacing: normal;
+  text-decoration: none;
+}
