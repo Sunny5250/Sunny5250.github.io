@@ -204,3 +204,47 @@ a, .news-archive summary { transition: color 180ms ease, opacity 180ms ease; }
   a, .news-archive summary, .news-archive summary::before { transition: none; }
 }
 
+
+/* Reading position and restrained award hierarchy. */
+html { scrollbar-gutter: stable; }
+main > section, .publication { scroll-margin-top: var(--anchor-offset, 88px); }
+nav a { position: relative; flex: 0 0 auto; }
+nav a::after { content: ""; position: absolute; bottom: 3px; left: 0; right: 0; height: 2px; background: currentColor; transform: scaleX(0); transform-origin: center; transition: transform 180ms ease; }
+nav a[aria-current="location"] { color: #173f5b; }
+nav a[aria-current="location"]::after { transform: scaleX(1); }
+nav a:hover, nav a:focus-visible { text-decoration: none; }
+.award-college { display: block; color: var(--muted); font-family: var(--font-sans); font-size: 14px; line-height: 1.55; margin-bottom: 3px; }
+.award-name { display: block; font-size: 16px; font-weight: 600; }
+
+.figure-modal-open { overflow: hidden; }
+.figure-dialog { border: 0; padding: 0; border-radius: 12px; width: min(1180px, calc(100vw - 40px)); max-width: none; max-height: calc(100dvh - 40px); color: var(--ink); background: var(--paper); box-shadow: 0 24px 80px #0004; }
+.figure-dialog::backdrop { background: rgb(20 29 38 / 72%); }
+.figure-dialog-panel { padding: 18px 22px; }
+.figure-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+.figure-toolbar h2 { margin: 0; font-size: 17px; }
+.figure-dialog button { cursor: pointer; color: var(--link); background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; min-height: 44px; padding: 7px 12px; font-family: var(--font-sans); font-size: 14px; transition: background 180ms ease, color 180ms ease; }
+.figure-dialog button:hover { background: var(--placeholder); }
+.figure-dialog button:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+.figure-dialog .figure-close { font-size: 28px; line-height: 1; width: 44px; padding: 0; }
+.figure-stage { display: grid; place-items: center; min-height: 120px; }
+#figure-full { display: block; width: auto; height: auto; max-width: 100%; max-height: 62dvh; object-fit: contain; }
+#figure-error { font-family: var(--font-sans); color: var(--muted); }
+.figure-caption { margin: 14px 0 12px; font-size: 14px; line-height: 1.5; }
+.figure-controls { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px 14px; font-family: var(--font-sans); font-size: 14px; }
+#figure-counter { color: var(--muted); min-width: 40px; text-align: center; font-variant-numeric: tabular-nums; }
+#figure-original { margin-left: auto; padding: 10px 0; }
+@media (max-width: 760px) {
+  .header-inner { flex-direction: column; align-items: stretch; gap: 2px; padding-block: 10px 4px; }
+  nav { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; gap: 18px; padding-inline: 4px; scrollbar-width: thin; overscroll-behavior-x: contain; }
+  nav a { white-space: nowrap; min-height: 44px; display: inline-flex; align-items: center; }
+  main > section, .publication { scroll-margin-top: var(--anchor-offset, 112px); }
+  .figure-dialog { width: calc(100vw - 20px); max-height: calc(100dvh - 20px); border-radius: 10px; }
+  .figure-dialog-panel { padding: 12px; }
+  #figure-full { max-height: 54dvh; }
+  #figure-original { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  nav a::after, .figure-dialog button { transition: none; }
+}
+@media print { .figure-dialog { display: none !important; } }
+
