@@ -173,7 +173,7 @@ p { margin-bottom: 12px; }
 .news-archive[open] .when-open { display: inline; }
 .news-paper { font-weight: 600; }
 strong.news-paper { color: var(--ink); }
-a.news-paper { text-decoration: underline; }
+a.news-paper, a.news-paper:hover, a.news-paper:focus-visible { text-decoration: none; }
 .publication-link-secondary a { color: var(--muted); }
 .award-original { display: block; margin-top: 3px; color: var(--muted); font-family: var(--font-sans); font-size: 14px; }
 .award-group + .award-group { margin-top: 20px; }
@@ -184,3 +184,23 @@ a.news-paper { text-decoration: underline; }
 
 .education-stage { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 3px 18px; margin-top: 10px; }
 .education-stage .education-program { flex: 1 1 360px; }
+
+/* Consistent, restrained motion for in-page navigation and interactive links. */
+html { scroll-behavior: smooth; }
+a, .news-archive summary { transition: color 180ms ease, opacity 180ms ease; }
+.news-archive summary { list-style: none; display: flex; align-items: center; gap: 8px; }
+.news-archive summary::-webkit-details-marker { display: none; }
+.news-archive summary::before {
+  content: ""; width: 6px; height: 6px;
+  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg); transition: transform 280ms ease;
+}
+.news-archive[open]:not([data-closing]) summary::before { transform: rotate(45deg); }
+.news-archive[data-closing] .when-open { display: none; }
+.news-archive[data-closing] .when-closed { display: inline; }
+.news-archive.is-animating { overflow: hidden; will-change: height; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  a, .news-archive summary, .news-archive summary::before { transition: none; }
+}
+
