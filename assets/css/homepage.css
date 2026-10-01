@@ -47,14 +47,14 @@ h2 { font-size: 22px; font-weight: 600; letter-spacing: -.2px; margin-bottom: 20
 h3 { font-size: 15px; font-weight: 600; margin-block: 16px 8px; }
 p { margin-bottom: 12px; }
 
-.profile-grid { display: grid; grid-template-columns: 148px minmax(0, 1fr); grid-template-areas: "aside identity" "aside biography"; column-gap: 36px; row-gap: 18px; align-items: start; }
+.profile-grid { display: grid; grid-template-columns: 148px minmax(0, 1fr); grid-template-areas: "aside identity" "aside biography"; grid-template-rows: auto 1fr; column-gap: 36px; row-gap: 12px; align-items: start; }
 .profile-identity { grid-area: identity; min-width: 0; }
 .profile-aside { grid-area: aside; }
 .profile-biography { grid-area: biography; min-width: 0; }
 .profile-aside, .profile-identity { min-width: 0; overflow-wrap: anywhere; }
 .profile-name { font-family: var(--font-name); font-size: 28px; font-weight: 600; letter-spacing: -.2px; line-height: 1.3; margin-bottom: 10px; }
-.profile-name-zh { font-family: "Songti SC", "STSong", "SimSun", serif; display: inline-block; font-size: .82em; font-weight: 500; letter-spacing: .02em; white-space: nowrap; }
-.name-separator { margin-inline: 5px 8px; color: var(--muted); font-weight: 400; }
+.profile-name-zh { font-family: "Songti SC", "STSong", "SimSun", serif; display: inline-block; font-size: .82em; font-weight: 600; letter-spacing: .02em; white-space: nowrap; }
+.name-separator { margin-inline: 3px 5px; color: var(--muted); font-weight: 400; }
 .profile-position, .profile-affiliation { margin-bottom: 3px; font-size: 14px; color: var(--muted); font-style: normal; line-height: 1.55; }
 .profile-position { font-size: 16px; font-weight: 600; color: var(--ink); }
 .profile-biography { margin-top: 0; max-width: 76ch; }
@@ -141,7 +141,7 @@ p { margin-bottom: 12px; }
   main { padding-top: 24px; }
   main > section { padding-block: 22px 24px; scroll-margin-top: 132px; }
   .publication { scroll-margin-top: 132px; }
-  .profile-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "identity" "aside" "biography"; gap: 20px; }
+  .profile-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "identity" "aside" "biography"; grid-template-rows: auto auto auto; gap: 16px; }
   .profile-aside { display: flex; align-items: center; gap: 24px; }
   .portrait-area { flex: 0 0 112px; }
   .portrait, .portrait-placeholder { width: 112px; height: 135px; }
@@ -247,4 +247,16 @@ nav a:hover, nav a:focus-visible { text-decoration: none; }
   nav a::after, .figure-dialog button { transition: none; }
 }
 @media print { .figure-dialog { display: none !important; } }
+
+
+/* A quiet, visible affordance for the existing full-size figure viewer. */
+.publication-figure { position: relative; }
+.figure-zoom-hint { position: absolute; right: 6px; bottom: 6px; display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid var(--rule); border-radius: 6px; background: rgb(255 255 255 / 94%); color: var(--link); box-shadow: 0 1px 5px #00000012; pointer-events: none; transition: opacity 160ms ease, transform 160ms ease; }
+.figure-zoom-hint svg { width: 16px; height: 16px; }
+@media (min-width: 761px) and (hover: hover) and (pointer: fine) {
+  .figure-zoom-hint { opacity: 0; transform: translateY(2px); }
+  .publication-figure:hover .figure-zoom-hint, .publication-figure:focus-visible .figure-zoom-hint { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) { .figure-zoom-hint { transition: none; } }
+@media print { .figure-zoom-hint { display: none; } }
 
