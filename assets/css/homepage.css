@@ -66,8 +66,8 @@ p { margin-bottom: 12px; }
 .portrait-placeholder { display: grid; place-items: center; border: 1px dashed #a5adb7; background: var(--placeholder); color: var(--muted); font-size: 13px; }
 .profile-links { display: flex; flex-direction: column; align-items: flex-start; gap: 0; padding: 0; margin: 10px 0 0; list-style: none; font-size: 13px; }
 .profile-links li { max-width: 100%; }
-.profile-links a { display: inline-flex; align-items: center; gap: 7px; min-height: 30px; padding-block: 4px; text-decoration: none; }
-.profile-links a:hover, .profile-links a:focus-visible { text-decoration: underline; }
+.profile-links a { display: inline-flex; align-items: center; gap: 7px; min-height: 30px; padding: 4px 8px; margin-inline-start: -8px; border-radius: 6px; text-decoration: none; }
+.profile-links a:hover, .profile-links a:focus-visible { background-color: #edf4f9; color: #173f5b; text-decoration: none; }
 .profile-icon { width: 14px; height: 14px; flex: 0 0 14px; fill: currentColor; }
 
 .dated-list, .service-list { margin: 0; padding: 0; list-style: none; }
@@ -259,4 +259,11 @@ nav a:hover, nav a:focus-visible { text-decoration: none; }
 }
 @media (prefers-reduced-motion: reduce) { .figure-zoom-hint { transition: none; } }
 @media print { .figure-zoom-hint { display: none; } }
+
+
+/* Subtle section accents and contact-link feedback. */
+.section-heading { display: flex; align-items: center; gap: 9px; }
+.section-icon { flex: 0 0 20px; width: 20px; height: 20px; color: #648094; }
+.profile-links a { transition: color 180ms ease, background-color 180ms ease; }
+@media (prefers-reduced-motion: reduce) { .profile-links a { transition: none; } }
 
