@@ -62,9 +62,9 @@ p { margin-bottom: 12px; }
 .profile-biography strong { font-weight: 600; }
 .placeholder { color: var(--muted); }
 .portrait, .portrait-placeholder { display: block; width: 148px; height: 178px; }
-.portrait { object-fit: cover; border-radius: 8px; }
+.portrait { object-fit: cover; border-radius: 8px; box-shadow: 0 3px 12px rgb(36 58 76 / 9%); }
 .portrait-placeholder { display: grid; place-items: center; border: 1px dashed #a5adb7; background: var(--placeholder); color: var(--muted); font-size: 13px; }
-.profile-links { display: flex; flex-direction: column; align-items: flex-start; gap: 0; padding: 0; margin: 10px 0 0; list-style: none; font-size: 13px; }
+.profile-links { display: flex; flex-direction: column; align-items: flex-start; gap: 0; padding: 0; margin: 10px 0 0; list-style: none; font-size: 14px; }
 .profile-links li { max-width: 100%; }
 .profile-links a { display: inline-flex; align-items: center; gap: 7px; min-height: 30px; padding: 4px 8px; margin-inline-start: -8px; border-radius: 6px; text-decoration: none; }
 .profile-links a:hover, .profile-links a:focus-visible { background-color: #edf4f9; color: #173f5b; text-decoration: none; }
@@ -101,7 +101,7 @@ p { margin-bottom: 12px; }
 .publication-links a { display: inline-block; min-height: 32px; padding-block: 4px; text-decoration: none; }
 .publication-links a:hover, .publication-links a:focus-visible { text-decoration: underline; }
 /* Use one width per breakpoint; intrinsic height preserves every complete figure. */
-.publication-figure { display: block; flex: 0 0 var(--publication-preview-width); width: var(--publication-preview-width); max-width: 100%; min-width: 0; align-self: center; line-height: 0; cursor: zoom-in; }
+.publication-figure { display: block; flex: 0 0 var(--publication-preview-width); width: var(--publication-preview-width); max-width: 100%; min-width: 0; align-self: center; line-height: 0; cursor: zoom-in; padding: 6px; border: 1px solid #e8edf1; border-radius: 6px; background: var(--paper); box-shadow: 0 2px 8px rgb(36 58 76 / 5%); }
 .publication-preview { display: block; width: 100%; height: auto; object-fit: contain; }
 
 .education-list { list-style: none; padding: 0; margin: 0; }
@@ -270,4 +270,7 @@ nav a:hover, nav a:focus-visible { text-decoration: none; }
 .profile-links a { transition: color 180ms ease, background-color 180ms ease; }
 @media (prefers-reduced-motion: reduce) { .profile-links a { transition: none; } }
 
+
+
+@media print { .portrait, .publication-figure { box-shadow: none; } }
 
