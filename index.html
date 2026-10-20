@@ -208,7 +208,10 @@ GitHub</a></li>
   
 </article>
 </li>
-<li><article class="publication" id="publication-lin2025adaptive">
+</ul>
+      <details class="news-archive publications-archive">
+        <summary><span class="when-closed">Show older publications</span><span class="when-open">Hide older publications</span></summary>
+        <ul class="bibliography" style="margin-top: 8px;"><li><article class="publication" id="publication-lin2025adaptive">
   <div class="publication-information"><h4 class="publication-title"><a href="https://link.springer.com/chapter/10.1007/978-3-031-72943-0_21">Adaptive Multi-modal Fusion of Spatially Variant Kernel Refinement with Diffusion Model for Blind Image Super-Resolution</a></h4>
     
       <p class="publication-venue">ECCV, 2024</p>
@@ -324,6 +327,7 @@ GitHub</a></li>
   
 </article>
 </li></ul>
+      </details>
     </div>
   </div>
 </section>
@@ -436,7 +440,7 @@ GitHub</a></li>
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         document.querySelectorAll('.news-archive').forEach((details) => {
           const summary = details.querySelector('summary');
-          const content = details.querySelector('.dated-list');
+          const content = details.querySelector('.dated-list, .bibliography');
           if (!summary || !content || !details.animate) return;
           let animation = null;
           let expanded = details.open;
@@ -478,6 +482,18 @@ GitHub</a></li>
             );
             animation.onfinish = settle;
           });
+          // Reveal archived papers when following a direct publication link.
+          const revealHashTarget = () => {
+            let target;
+            try { target = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch { return; }
+            if (target && details.contains(target) && target !== summary) {
+              expanded = true;
+              settle();
+              requestAnimationFrame(() => target.scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth', block: 'start' }));
+            }
+          };
+          window.addEventListener('hashchange', revealHashTarget);
+          if (location.hash) revealHashTarget();
           // Reflow safely if the viewport or system motion preference changes mid-animation.
           window.addEventListener('resize', () => { if (animation) settle(); });
           reducedMotion.addEventListener('change', () => { if (animation) settle(); });
@@ -621,6 +637,7 @@ GitHub</a></li>
     </script>
   </body>
 </html>
+
 
 
 
