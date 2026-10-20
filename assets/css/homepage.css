@@ -276,5 +276,6 @@ nav a:hover, nav a:focus-visible { text-decoration: none; }
 
 
 
-/* Soft rose dates give News a quiet accent. */
-#news .entry-date { color: #aa6666; }
+/* Emphasize paper counts with a quiet rose accent. */
+#news .news-count { color: #aa6666; font-weight: 700; }
+
